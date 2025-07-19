@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import 'prismjs/themes/prism-tomorrow.css';
 
 export default function MDXContent({ children, searchTerm, searchIndex }) {
+  const router = useRouter();
+
   useEffect(() => {
     // Add ids to headings that don't have them
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
@@ -84,7 +87,7 @@ export default function MDXContent({ children, searchTerm, searchIndex }) {
 
               console.log('Scrolled to highlighted text');
 
-              // Remove highlight after 3 seconds
+              // Remove highlight after 3 seconds and clean URL
               setTimeout(() => {
                 if (span.parentNode) {
                   span.parentNode.replaceChild(
@@ -93,6 +96,11 @@ export default function MDXContent({ children, searchTerm, searchIndex }) {
                   );
                   console.log('Removed highlight');
                 }
+                
+                // Clean URL - remove search parameters
+                const currentPath = window.location.pathname;
+                router.replace(currentPath, { scroll: false });
+                console.log('Cleaned URL:', currentPath);
               }, 3000);
             } catch (e) {
               console.error('Error highlighting text:', e);
@@ -101,9 +109,22 @@ export default function MDXContent({ children, searchTerm, searchIndex }) {
                 behavior: 'smooth',
                 block: 'center'
               });
+              
+              // Clean URL after scroll
+              setTimeout(() => {
+                const currentPath = window.location.pathname;
+                router.replace(currentPath, { scroll: false });
+                console.log('Cleaned URL after scroll:', currentPath);
+              }, 1000);
             }
           } else {
             console.log('No matching text found');
+            // Clean URL even if no text found
+            setTimeout(() => {
+              const currentPath = window.location.pathname;
+              router.replace(currentPath, { scroll: false });
+              console.log('Cleaned URL (no text found):', currentPath);
+            }, 1000);
           }
         }
       }, 500); // เพิ่ม delay เพื่อให้ content render เสร็จ
@@ -118,7 +139,7 @@ export default function MDXContent({ children, searchTerm, searchIndex }) {
         tagName: heading.tagName
       });
     });
-  }, [searchTerm, searchIndex]);
+  }, [searchTerm, searchIndex, router]);
 
   return (
     <div 
