@@ -171,7 +171,7 @@ export default function Search({ allDocs }) {
 
       {isOpen && query && results.length === 0 && (
         <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-3 lg:p-4">
-          <div className="text-gray-500 text-center text-sm lg:text-base">No results found for "{query}"</div>
+          <div className="text-gray-500 text-center text-sm lg:text-base">No results found for &ldquo;{query}&rdquo;</div>
         </div>
       )}
     </div>
