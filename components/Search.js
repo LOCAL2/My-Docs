@@ -108,6 +108,13 @@ export default function Search({ allDocs }) {
     setResults([]);
     setSelectedIndex(-1);
     
+    // Close mobile sidebar if open
+    const overlay = document.getElementById('mobile-sidebar-overlay');
+    if (overlay && !overlay.classList.contains('hidden')) {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
     // ส่ง search term ไปยังหน้าที่คลิก
     const url = `/docs/${result.slug}?search=${encodeURIComponent(result.searchTerm)}&index=${result.searchIndex}`;
     router.push(url);
@@ -144,18 +151,18 @@ export default function Search({ allDocs }) {
       </div>
 
       {isOpen && results.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-64 lg:max-h-96 overflow-y-auto">
           {results.map((result, index) => (
             <button
               key={result.slug}
               onClick={() => handleResultClick(result)}
-              className={`block w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors ${
+              className={`block w-full text-left px-3 lg:px-4 py-2 lg:py-3 hover:bg-gray-50 transition-colors ${
                 index === selectedIndex ? 'bg-blue-50 border-l-4 border-blue-500' : ''
               }`}
             >
-              <div className="font-medium text-gray-900 mb-1">{result.title}</div>
+              <div className="font-medium text-gray-900 mb-1 text-sm lg:text-base">{result.title}</div>
               {result.snippet && (
-                <div className="text-sm text-gray-600 line-clamp-2">{result.snippet}</div>
+                <div className="text-xs lg:text-sm text-gray-600 line-clamp-2">{result.snippet}</div>
               )}
             </button>
           ))}
@@ -163,8 +170,8 @@ export default function Search({ allDocs }) {
       )}
 
       {isOpen && query && results.length === 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4">
-          <div className="text-gray-500 text-center">No results found for "{query}"</div>
+        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-3 lg:p-4">
+          <div className="text-gray-500 text-center text-sm lg:text-base">No results found for "{query}"</div>
         </div>
       )}
     </div>

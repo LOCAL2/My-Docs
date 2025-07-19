@@ -143,7 +143,7 @@ export default function MDXContent({ children, searchTerm, searchIndex }) {
 
   return (
     <div 
-      className="prose prose-lg max-w-none font-mono bg-white p-8 rounded-lg shadow-sm border border-gray-200"
+      className="prose prose-sm sm:prose-base lg:prose-lg max-w-none font-mono bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-sm border border-gray-200"
       style={{
         color: '#1a1a1a',
         '--tw-prose-body': '#1a1a1a',
