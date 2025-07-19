@@ -12,6 +12,8 @@ A beautiful documentation website built with Next.js, featuring Markdown/MDX sup
 - 🔍 **SEO Optimized** - Built-in SEO features and meta tags
 - 📱 **Mobile Responsive** - Works perfectly on all devices
 - 🎯 **Easy Customization** - Simple configuration through `config.mjs`
+- 🔍 **Real-time Search** - Search functionality with scroll-to-text highlighting
+- 📱 **Responsive Design** - Optimized for all screen sizes
 
 ## Quick Start
 
@@ -55,6 +57,9 @@ my-docs-site/
 │   ├── Sidebar.js       # Sidebar navigation
 │   ├── TableOfContents.js # Table of contents
 │   ├── MDXContent.js    # MDX content wrapper
+│   ├── Search.js        # Search functionality
+│   ├── DocNavigation.js # Previous/Next navigation
+│   ├── MobileSidebarToggle.js # Mobile sidebar toggle
 │   └── DocsLayout.js    # Main layout component
 ├── lib/                  # Utility functions
 │   └── mdx.js           # MDX processing utilities
@@ -144,6 +149,7 @@ Create tables with Markdown:
 | Markdown | Full support | ✅ |
 | Syntax Highlighting | Multiple languages | ✅ |
 | Responsive Design | Mobile-friendly | ✅ |
+| Search Functionality | Real-time search | ✅ |
 
 ## Customization
 
@@ -154,6 +160,7 @@ Customize the appearance by modifying:
 - `components/MDXContent.js` - Main content styling
 - `components/Sidebar.js` - Sidebar appearance
 - `components/TableOfContents.js` - Table of contents styling
+- `components/Search.js` - Search component styling
 - `src/app/globals.css` - Global styles
 
 ### Components
@@ -176,16 +183,19 @@ export default function CustomAlert({ type, children }) {
 ### Vercel (Recommended)
 
 1. Push your code to GitHub
-2. Connect your repository to Vercel
+2. Connect your repository to [Vercel](https://vercel.com)
 3. Deploy automatically on every push
+4. Get a custom domain and SSL certificate
 
-### Netlify
+**Vercel Configuration:**
+- Framework Preset: Next.js
+- Build Command: `npm run build`
+- Output Directory: `.next`
+- Install Command: `npm install`
 
-1. Build command: `npm run build`
-2. Publish directory: `.next`
-3. Deploy from Git or upload manually
+### Alternative Deployment Options
 
-### Static Export
+#### Static Export
 
 For static hosting:
 
@@ -195,6 +205,13 @@ npm run export
 ```
 
 The static files will be in the `out/` directory.
+
+#### Other Platforms
+
+- **Netlify** - Use static export
+- **GitHub Pages** - Use static export
+- **AWS S3** - Use static export
+- **Firebase Hosting** - Use static export
 
 ## Available Scripts
 
@@ -213,7 +230,9 @@ The static files will be in the `out/` directory.
 - **gray-matter** - Frontmatter parsing
 - **remark-gfm** - GitHub Flavored Markdown
 - **rehype-highlight** - Syntax highlighting
+- **rehype-slug** - Auto-generate heading IDs
 - **prismjs** - Code highlighting themes
+- **@heroicons/react** - Icon library
 
 ### Development Dependencies
 
@@ -246,6 +265,7 @@ If you encounter any issues or have questions:
 - Built with [Next.js](https://nextjs.org/)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
 - Icons from [Heroicons](https://heroicons.com/)
+- Deployed with [Vercel](https://vercel.com/)
 
 ---
 
